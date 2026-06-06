@@ -1,40 +1,43 @@
 import React, { useMemo } from 'react'
 import { motion } from 'framer-motion'
 import '@/styles/ParticleField.css'
+
 export const ParticleField: React.FC = () => {
   const particles = useMemo(() => {
-    return Array.from({
-      length: 40,
-    }).map((_, i) => ({
+    return Array.from({ length: 40 }).map((_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
       size: Math.random() * 2 + 1,
       duration: Math.random() * 20 + 10,
       delay: Math.random() * 5,
-      color: Math.random() > 0.5 ? '#00d4ff' : '#06fff0',
+      variant: Math.random() > 0.5 ? 1 : 2,
     }))
   }, [])
+
   return (
     <div className="particle-field-container">
-      {/* Base gradient glows */}
       <div className="particle-glow top-left" />
       <div className="particle-glow bottom-right" />
       <div className="particle-glow center" />
 
-      {/* Grid overlay */}
+      <div className="particle-hud-ring particle-hud-ring--outer" />
+      <div className="particle-hud-ring particle-hud-ring--mid" />
+      <div className="particle-hud-ring particle-hud-ring--inner" />
+      <div className="particle-scanner" />
+
+      <div className="particle-scanlines" />
+      <div className="particle-glitch-pulse" />
+
       <div className="particle-grid" />
 
-      {/* Drifting Particles */}
       {particles.map((p) => (
         <motion.div
           key={p.id}
-          className="particle-dot"
+          className={`particle-dot particle-dot--${p.variant}`}
           style={{
             width: p.size,
             height: p.size,
-            backgroundColor: p.color,
-            boxShadow: `0 0 ${p.size * 2}px ${p.color}`,
             left: `${p.x}%`,
             top: `${p.y}%`,
           }}

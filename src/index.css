@@ -3,9 +3,13 @@
 
 @import './styles/variables.css';
 @import './styles/base.css';
-@import './styles/themes/cyberpunk.css';
+@import './styles/themes/nexus.css';
 @import './styles/themes/jarvis.css';
+@import './styles/themes/cyberpunk.css';
+@import './styles/themes/effects.css';
 @import './styles/ui/primitives.css';
+@import './styles/Dashboard.css';
+@import './styles/AICommand.css';
 @import './styles/responsive.css';
 @import './styles/App.css';
 
@@ -22,24 +26,25 @@ html, body, #root {
 }
 
 body {
-  background-color: #02040a;
-  color: #e2e8f0;
-  font-family: 'Inter', 'Segoe UI', sans-serif;
+  background-color: var(--surface-bg);
+  color: var(--text-primary);
+  font-family: var(--font-sans), 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   overflow: hidden;
 }
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: rgba(0, 212, 255, 0.05); }
-::-webkit-scrollbar-thumb { background: rgba(0, 212, 255, 0.3); border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(0, 212, 255, 0.6); }
+::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
-/* Glow utilities */
-.text-glow-cyan    { text-shadow: 0 0 8px rgba(6, 255, 240, 0.6); }
-.text-glow-blue    { text-shadow: 0 0 8px rgba(0, 212, 255, 0.6); }
+/* Glow utilities — theme-aware */
+.text-glow-cyan    { text-shadow: 0 0 8px rgba(var(--theme-primary-rgb), 0.6); }
+.text-glow-blue    { text-shadow: 0 0 8px rgba(var(--theme-secondary-rgb), 0.6); }
 .text-glow-purple  { text-shadow: 0 0 8px rgba(168, 85, 247, 0.6); }
-.text-glow-magenta { text-shadow: 0 0 8px rgba(255, 0, 234, 0.6); }
+.text-glow-magenta { text-shadow: 0 0 8px rgba(var(--theme-primary-rgb), 0.6); }
+.text-glow-accent  { text-shadow: 0 0 8px var(--accent-glow); }
 
 .scanlines {
   background: linear-gradient(

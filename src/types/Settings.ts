@@ -1,7 +1,14 @@
-export type AccentColor = 'cyan' | 'blue' | 'purple' | 'magenta' | 'red'
+export type AccentColor =
+  | 'cyan'
+  | 'blue'
+  | 'purple'
+  | 'magenta'
+  | 'red'
+  | 'gold'
+  | 'green'
 export type FontSize = 'sm' | 'md' | 'lg'
 export type ColorMode = 'dark' | 'light' | 'system'
-export type VisualTheme = 'default' | 'cyberpunk' | 'jarvis'
+export type VisualTheme = 'nexus' | 'cyberpunk' | 'jarvis'
 
 export interface AppSettings {
   accentColor: AccentColor

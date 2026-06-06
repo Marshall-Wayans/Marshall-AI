@@ -7,11 +7,23 @@ import {
   BarChart2,
   ShieldAlert,
   LayoutTemplate,
+  Cpu,
 } from 'lucide-react'
 import type { DashboardModule } from '@/types/DashboardModule'
 import { ROUTES } from './routes'
 
 export const DASHBOARD_MODULES: DashboardModule[] = [
+  {
+    id: 'ai-command',
+    name: 'AI Command',
+    description:
+      'Primary neural interface — voice-driven command center for all Marshall systems.',
+    status: 'operational',
+    icon: Cpu,
+    route: ROUTES.aiCommand,
+    enabled: true,
+    comingSoon: false,
+  },
   {
     id: 'mission-control',
     name: 'Mission Control',
@@ -50,22 +62,22 @@ export const DASHBOARD_MODULES: DashboardModule[] = [
     name: 'Approval Center',
     description:
       'Workflow review queue for content approvals, clearance requests, and multi-stage authorization gates.',
-    status: 'maintenance',
+    status: 'active',
     icon: ClipboardCheck,
-    route: '/approval-center',
-    enabled: false,
-    comingSoon: true,
+    route: ROUTES.approvalCenter,
+    enabled: true,
+    comingSoon: false,
   },
   {
     id: 'agent-command',
     name: 'Agent Command',
     description:
       'Direct agent fleet management, task dispatch, clearance levels, and autonomous unit telemetry.',
-    status: 'offline',
+    status: 'operational',
     icon: Bot,
-    route: '/agent-command',
-    enabled: false,
-    comingSoon: true,
+    route: ROUTES.agentCommand,
+    enabled: true,
+    comingSoon: false,
   },
   {
     id: 'analytics-center',

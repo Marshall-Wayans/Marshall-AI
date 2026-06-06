@@ -15,7 +15,7 @@ import { HoloPanel } from '@/components/panels/HoloPanel'
 import { Card } from '@/components/ui/Card'
 import { HolographicCard } from '@/components/ui/HolographicCard'
 import { StatusIndicator } from '@/components/ui/StatusIndicator'
-import { SIMULATION_CENTER_MOCK } from '@/constants/simulationCenterMock'
+import { useSimulationStore } from '@/store/simulationStore'
 import type { SimulationMetric, SimulationStatus } from '@/types/SimulationCenter'
 import '@/styles/Views.css'
 import '@/styles/SimulationCenter.css'
@@ -91,7 +91,7 @@ const MetricCard: React.FC<MetricCardProps> = ({ metric, icon, delay = 0 }) => {
 }
 
 export const SimulationCenterPage: React.FC = () => {
-  const data = SIMULATION_CENTER_MOCK
+  const data = useSimulationStore((s) => s.simulation)
   const { scenario } = data
 
   const performanceMetrics: { metric: SimulationMetric; icon: React.ReactNode }[] = [

@@ -1,10 +1,126 @@
-html.theme-cyberpunk {
-  --accent: #ff00ea;
-  --accent-glow: rgba(255, 0, 234, 0.3);
-  --accent-dim: rgba(255, 0, 234, 0.1);
-  --nexus-cyan: #ff00ea;
+/* ═══ CYBERPUNK — Night City Neural Net ═══ */
+[data-theme='cyberpunk'] {
+  --theme-primary: #ff0080;
+  --theme-secondary: #a000ff;
+  --theme-glow: #00d4ff;
+  --theme-tertiary: #ff1493;
+  --theme-primary-rgb: 255, 0, 128;
+  --theme-secondary-rgb: 160, 0, 255;
+  --theme-glow-rgb: 0, 212, 255;
+
+  --surface-bg: #08000f;
+  --surface-panel: rgba(25, 0, 45, 0.85);
+  --surface-elevated: rgba(35, 0, 60, 0.92);
+  --surface-glass: rgba(255, 0, 128, 0.06);
+
+  --border-accent: rgba(255, 0, 128, 0.55);
+  --border-default: rgba(160, 0, 255, 0.2);
+  --glow-intensity: 0.65;
+  --glass-blur: 6px;
+  --panel-gradient: linear-gradient(135deg, rgba(255, 0, 128, 0.14), rgba(0, 212, 255, 0.04) 50%, transparent);
+
+  --bg-gradient-1: radial-gradient(ellipse at 10% 20%, rgba(255, 0, 128, 0.25), transparent 50%);
+  --bg-gradient-2: radial-gradient(ellipse at 90% 80%, rgba(160, 0, 255, 0.2), transparent 50%);
+  --bg-gradient-3: radial-gradient(ellipse at 50% 100%, rgba(0, 212, 255, 0.1), transparent 45%);
+
+  --particle-color-1: #ff0080;
+  --particle-color-2: #00d4ff;
+  --particle-glow-1: rgba(255, 0, 128, 0.22);
+  --particle-glow-2: rgba(160, 0, 255, 0.18);
+  --particle-glow-3: rgba(0, 212, 255, 0.12);
+  --grid-color: rgba(255, 0, 128, 0.12);
+  --grid-opacity: 0.09;
+  --scanline-opacity: 0.12;
+  --glitch-intensity: 1;
+
+  --avatar-core-glow: rgba(255, 0, 128, 0.65);
+  --avatar-ring-opacity: 0.55;
+  --avatar-pulse-color: #00d4ff;
+
+  --chart-fill: #ff0080;
+  --chart-fill-secondary: #00d4ff;
+  --gauge-fill: #ff0080;
+  --progress-fill: linear-gradient(90deg, #a000ff, #ff0080, #00d4ff);
+
+  --nexus-cyan: #00d4ff;
+  --nexus-blue: #a000ff;
+  --nexus-magenta: #ff0080;
+  --nexus-purple: #a000ff;
 }
 
-html.theme-cyberpunk body {
-  background-color: #0a0014;
+[data-theme='cyberpunk'] body {
+  background-color: var(--surface-bg);
+  background-image: var(--bg-gradient-1), var(--bg-gradient-2), var(--bg-gradient-3);
+}
+
+[data-theme='cyberpunk'] .particle-scanlines,
+[data-theme='cyberpunk'] .particle-glitch-pulse {
+  opacity: 1;
+}
+
+[data-theme='cyberpunk'] .holo-panel,
+[data-theme='cyberpunk'] .ai-response-panel,
+[data-theme='cyberpunk'] .ai-conversation-entry {
+  border-color: rgba(255, 0, 128, 0.3);
+  box-shadow:
+    0 0 20px rgba(255, 0, 128, 0.1),
+    inset 0 0 24px rgba(160, 0, 255, 0.04);
+}
+
+[data-theme='cyberpunk'] .topnav,
+[data-theme='cyberpunk'] .command-ribbon {
+  border-bottom-color: rgba(255, 0, 128, 0.35);
+  box-shadow: 0 0 28px rgba(255, 0, 128, 0.15);
+}
+
+[data-theme='cyberpunk'] .ai-core-ambient {
+  background: radial-gradient(circle, #ff0080 0%, #a000ff 40%, transparent 70%);
+  opacity: 0.7;
+}
+
+[data-theme='cyberpunk'] .ai-core-svg {
+  filter: drop-shadow(0 0 16px #ff0080) drop-shadow(0 0 32px #00d4ff);
+  color: #ff0080;
+  animation: cyberpunk-core-glitch 12s infinite;
+}
+
+[data-theme='cyberpunk'] .ai-voice-bar {
+  background: linear-gradient(to top, #a000ff, #ff0080, #00d4ff);
+}
+
+[data-theme='cyberpunk'] .ai-command-greeting {
+  animation: cyberpunk-text-glitch 8s infinite;
+}
+
+[data-theme='cyberpunk'] .ai-quick-command-chip:hover:not(:disabled) {
+  box-shadow: 0 0 16px rgba(255, 0, 128, 0.5), 0 0 8px rgba(0, 212, 255, 0.3);
+}
+
+[data-theme='cyberpunk'] .ai-command-interface::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 212, 255, 0.03) 2px,
+    rgba(0, 212, 255, 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 0;
+  animation: scanline-scroll 10s linear infinite;
+}
+
+@keyframes cyberpunk-text-glitch {
+  0%, 92%, 100% { text-shadow: 0 0 10px rgba(255, 0, 128, 0.7); transform: translateX(0); }
+  93% { text-shadow: 3px 0 #00d4ff, -3px 0 #ff0080; transform: translateX(2px); }
+  94% { text-shadow: -2px 0 #00d4ff, 2px 0 #ff0080; transform: translateX(-2px); }
+  95% { text-shadow: 0 0 10px rgba(255, 0, 128, 0.7); transform: translateX(0); }
+}
+
+@keyframes cyberpunk-core-glitch {
+  0%, 95%, 100% { filter: drop-shadow(0 0 16px #ff0080) drop-shadow(0 0 32px #00d4ff); }
+  96% { filter: drop-shadow(4px 0 #00d4ff) drop-shadow(-4px 0 #ff0080); }
+  97% { filter: drop-shadow(-2px 0 #00d4ff) drop-shadow(2px 0 #ff0080); }
 }

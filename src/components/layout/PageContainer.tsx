@@ -13,7 +13,9 @@ export const PageContainer = () => {
 
   useEffect(() => {
     setLastVisitedPath(location.pathname)
-    const match = NAV_ITEMS.find((item) => item.path === location.pathname)
+    const match =
+      NAV_ITEMS.find((item) => item.path === location.pathname) ??
+      (location.pathname === '/' ? NAV_ITEMS.find((i) => i.path === '/') : undefined)
     const label =
       match?.label ??
       (location.pathname.includes('profile')

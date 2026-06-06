@@ -3,8 +3,11 @@ import { ParticleField } from '@/components/panels/ParticleField'
 import { GlobalNotificationArea } from '@/components/notifications'
 import { LoadingOverlay } from '@/components/ui'
 import { GlobalModalHost } from '@/app/GlobalModalHost'
+import { useSimulationEngine } from '@/hooks/useSimulationEngine'
 
-export const MainLayout = () => (
+export const MainLayout = () => {
+  useSimulationEngine()
+  return (
   <div className="app-container">
     <ParticleField />
     <Outlet />
@@ -12,4 +15,5 @@ export const MainLayout = () => (
     <GlobalModalHost />
     <LoadingOverlay />
   </div>
-)
+  )
+}

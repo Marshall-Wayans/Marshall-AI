@@ -9,7 +9,7 @@ import {
 } from 'lucide-react'
 import { HoloPanel } from '@/components/panels/HoloPanel'
 import { StatusIndicator } from '@/components/ui/StatusIndicator'
-import { TREND_RADAR_MOCK } from '@/constants/trendRadarMock'
+import { useSimulationStore } from '@/store/simulationStore'
 import type { TrendLevel, VelocityDirection } from '@/types/TrendRadar'
 import '@/styles/Views.css'
 import '@/styles/TrendRadar.css'
@@ -50,7 +50,7 @@ export const TrendRadarPage: React.FC = () => {
     competitionLevels,
     growthPotentials,
     heatMap,
-  } = TREND_RADAR_MOCK
+  } = useSimulationStore((s) => s.trends)
 
   return (
     <motion.div
@@ -76,7 +76,7 @@ export const TrendRadarPage: React.FC = () => {
                   key={`${cell.row}-${cell.col}`}
                   className="trend-radar-heatmap-cell"
                   style={{
-                    backgroundColor: `rgba(6, 255, 240, ${cell.intensity * 0.65})`,
+                    backgroundColor: `rgba(var(--theme-primary-rgb), ${cell.intensity * 0.65})`,
                   }}
                   title={cell.label}
                 >

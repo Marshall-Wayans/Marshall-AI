@@ -1,49 +1,135 @@
-/* CSS Custom Properties - Single Source of Truth */
-:root {
-  /* Accent Colors - Default Cyan */
-  --accent: #00f0ff;
-  --accent-glow: rgba(0, 240, 255, 0.25);
-  --accent-dim: rgba(0, 240, 255, 0.08);
-  /* Base Colors */
-  --nexus-black: #02040a;
-  --nexus-dark: rgba(2, 4, 10, 0.65);
-  --nexus-cyan: #06fff0;
-  --nexus-blue: #00d4ff;
+/* ═══════════════════════════════════════════════════════════════
+   MARSHALL AI — Theme Engine Design Tokens
+   All components consume these CSS variables. Theme files override
+   --theme-* tokens; user accent picker sets --user-accent-*.
+   ═══════════════════════════════════════════════════════════════ */
+
+:root,
+[data-theme='nexus'] {
+  /* Theme palette — NEXUS (default) */
+  --theme-primary: #00d4ff;
+  --theme-secondary: #00ffcc;
+  --theme-glow: #00f5ff;
+  --theme-tertiary: #06fff0;
+  --theme-primary-rgb: 0, 212, 255;
+  --theme-secondary-rgb: 0, 255, 204;
+  --theme-glow-rgb: 0, 245, 255;
+
+  /* User accent — defaults to teal; overridden inline by accent picker */
+  --accent: #00D4C8;
+  --accent-rgb: 0, 212, 200;
+  --accent-dim: rgba(0, 212, 200, 0.15);
+  --accent-glow: rgba(0, 212, 200, 0.4);
+  --accent-border: rgba(0, 212, 200, 0.5);
+  --accent-strong: rgba(0, 212, 200, 0.8);
+  --accent-secondary: var(--theme-secondary);
+
+  /* Surfaces */
+  --surface-bg: #02040a;
+  --surface-panel: rgba(2, 8, 18, 0.72);
+  --surface-elevated: rgba(4, 16, 32, 0.85);
+  --surface-overlay: rgba(2, 4, 10, 0.75);
+  --surface-glass: rgba(255, 255, 255, 0.04);
+
+  /* Legacy aliases (backward compat) */
+  --nexus-black: var(--surface-bg);
+  --nexus-dark: var(--surface-panel);
+  --nexus-cyan: var(--theme-tertiary);
+  --nexus-blue: var(--theme-primary);
   --nexus-purple: #a855f7;
   --nexus-magenta: #ff00ea;
   --nexus-red: #ff003c;
+
+  /* Borders */
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-default: rgba(255, 255, 255, 0.1);
+  --border-accent: var(--accent-border);
+  --border-glow: var(--theme-glow);
+
+  /* Text */
+  --text-primary: #e2e8f0;
+  --text-secondary: #cbd5e1;
+  --text-muted: #64748b;
+  --text-dim: #94a3b8;
+
+  /* Effects */
+  --shadow-neon: 0 0 10px var(--accent-glow), inset 0 0 10px var(--accent-dim);
+  --shadow-glow: 0 0 15px var(--accent);
+  --shadow-theme: 0 0 30px rgba(var(--theme-glow-rgb), 0.15);
+  --glow-intensity: 0.25;
+  --glass-blur: 16px;
+  --panel-gradient: linear-gradient(135deg, rgba(var(--theme-primary-rgb), 0.06), transparent 60%);
+
+  /* Background environment */
+  --bg-gradient-1: radial-gradient(ellipse at 30% 20%, rgba(var(--theme-primary-rgb), 0.12), transparent 50%);
+  --bg-gradient-2: radial-gradient(ellipse at 70% 80%, rgba(var(--theme-secondary-rgb), 0.08), transparent 50%);
+  --bg-gradient-3: radial-gradient(ellipse at 50% 50%, rgba(var(--theme-glow-rgb), 0.04), transparent 70%);
+  --particle-color-1: var(--theme-primary);
+  --particle-color-2: var(--theme-secondary);
+  --particle-glow-1: rgba(var(--theme-primary-rgb), 0.12);
+  --particle-glow-2: rgba(var(--theme-secondary-rgb), 0.1);
+  --particle-glow-3: rgba(var(--theme-glow-rgb), 0.06);
+  --grid-color: rgba(var(--theme-primary-rgb), 0.04);
+  --grid-opacity: 0.04;
+  --scanline-opacity: 0;
+  --hud-ring-color: transparent;
+  --glitch-intensity: 0;
+
+  /* Avatar */
+  --avatar-core-glow: rgba(var(--theme-primary-rgb), 0.5);
+  --avatar-ring-opacity: 0.3;
+  --avatar-pulse-color: var(--theme-glow);
+
+  /* Charts, gauges, progress */
+  --chart-fill: var(--accent);
+  --chart-fill-secondary: var(--theme-secondary);
+  --chart-glow: var(--accent-glow);
+  --gauge-track: var(--border-subtle);
+  --gauge-fill: var(--accent);
+  --progress-track: var(--border-subtle);
+  --progress-fill: linear-gradient(90deg, var(--theme-secondary), var(--accent));
+
+  /* Scrollbar */
+  --scrollbar-track: rgba(var(--theme-primary-rgb), 0.05);
+  --scrollbar-thumb: rgba(var(--theme-primary-rgb), 0.3);
+
   /* Typography */
   --font-orbitron: 'Chakra Petch', sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
   --font-sans: 'Inter', sans-serif;
-  /* Spacing Scale */
+
+  /* Spacing */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
   --space-4: 1rem;
   --space-6: 1.5rem;
+  --space-7: 1.75rem;
   --space-8: 2rem;
+  --space-10: 2.5rem;
   --space-12: 3rem;
   --space-16: 4rem;
+
   /* Border Radius */
   --radius-sm: 2px;
   --radius-md: 4px;
   --radius-lg: 8px;
   --radius-full: 9999px;
-  /* Shadows */
-  --shadow-neon: 0 0 10px var(--accent-glow), inset 0 0 10px var(--accent-dim);
-  --shadow-glow: 0 0 15px var(--accent);
-  /* Z-index Scale */
+
+  /* Z-index */
   --z-base: 0;
   --z-dropdown: 10;
   --z-sticky: 20;
   --z-modal: 30;
   --z-toast: 40;
+
   /* Transitions */
   --transition-fast: 150ms ease;
   --transition-base: 300ms ease;
   --transition-slow: 500ms ease;
-  /* Font Sizes - Base 16px */
+  --transition-theme: 600ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Font Sizes */
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
   --text-base: 1rem;
@@ -54,23 +140,40 @@
   --text-4xl: 2.25rem;
   --text-5xl: 3rem;
 }
+
+/* Theme transition smoothing */
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition:
+    background-color var(--transition-theme),
+    border-color var(--transition-theme),
+    color var(--transition-theme),
+    box-shadow var(--transition-theme),
+    opacity var(--transition-theme) !important;
+}
+
 /* Font Size Scaling */
-html.text-sm {
-  font-size: 14px;
-}
-html.text-md {
-  font-size: 16px;
-}
-html.text-lg {
-  font-size: 18px;
-}
-/* Light Theme Overrides */
+html.text-sm { font-size: 14px; }
+html.text-md { font-size: 16px; }
+html.text-lg { font-size: 18px; }
+
+/* Light mode overrides */
 html.light {
-  --nexus-black: #f5f8fc;
-  --nexus-dark: rgba(245, 248, 252, 0.85);
-  color: #0a0a0a;
+  --surface-bg: #f5f8fc;
+  --surface-panel: rgba(245, 248, 252, 0.92);
+  --surface-elevated: rgba(255, 255, 255, 0.95);
+  --surface-overlay: rgba(245, 248, 252, 0.88);
+  --text-primary: #0a0a0a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --border-subtle: rgba(0, 0, 0, 0.06);
+  --border-default: rgba(0, 0, 0, 0.1);
+  color: var(--text-primary);
 }
+
 html.light body {
   background-color: #ffffff;
-  color: #0a0a0a;
+  color: var(--text-primary);
 }

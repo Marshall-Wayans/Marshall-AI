@@ -191,8 +191,8 @@
   height: 100%;
   background: linear-gradient(
     90deg,
-    rgba(0, 212, 255, 0.25),
-    rgba(0, 212, 255, 0.7)
+    rgba(var(--accent-rgb), 0.25),
+    rgba(var(--accent-rgb), 0.7)
   );
 }
 
@@ -223,7 +223,7 @@
 }
 
 .trend-radar-heatmap-cell:hover {
-  border-color: rgba(6, 255, 240, 0.4);
+  border-color: var(--accent-border);
 }
 
 .trend-radar-heatmap-label {
@@ -248,7 +248,7 @@
   width: 10rem;
   height: 10rem;
   border-radius: 50%;
-  border: 1px solid rgba(6, 255, 240, 0.3);
+  border: 1px solid var(--accent-border);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -257,7 +257,7 @@
 .trend-radar-radar-axis-h,
 .trend-radar-radar-axis-v {
   position: absolute;
-  background-color: rgba(6, 255, 240, 0.2);
+  background-color: var(--accent-dim);
 }
 
 .trend-radar-radar-axis-h {
@@ -279,7 +279,7 @@
   transform-origin: top left;
   background: linear-gradient(
     to bottom right,
-    rgba(6, 255, 240, 0.4),
+    var(--accent-glow),
     transparent
   );
 }

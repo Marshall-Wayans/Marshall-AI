@@ -1,0 +1,78 @@
+/* ═══ NEXUS — Premium AI Research Lab ═══ */
+[data-theme='nexus'] {
+  --theme-primary: #00d4ff;
+  --theme-secondary: #00ffcc;
+  --theme-glow: #00f5ff;
+  --theme-tertiary: #06fff0;
+  --theme-primary-rgb: 0, 212, 255;
+  --theme-secondary-rgb: 0, 255, 204;
+  --theme-glow-rgb: 0, 245, 255;
+
+  --surface-bg: #02040a;
+  --surface-panel: rgba(2, 12, 24, 0.68);
+  --surface-elevated: rgba(4, 20, 40, 0.82);
+  --surface-glass: rgba(0, 212, 255, 0.03);
+
+  --border-accent: rgba(0, 212, 255, 0.3);
+  --glow-intensity: 0.2;
+  --glass-blur: 20px;
+  --panel-gradient: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(0, 255, 204, 0.02) 50%, transparent);
+
+  --bg-gradient-1: radial-gradient(ellipse at 25% 15%, rgba(0, 212, 255, 0.14), transparent 55%);
+  --bg-gradient-2: radial-gradient(ellipse at 75% 85%, rgba(0, 255, 204, 0.1), transparent 50%);
+  --bg-gradient-3: radial-gradient(ellipse at 50% 50%, rgba(0, 245, 255, 0.05), transparent 65%);
+
+  --particle-color-1: #00d4ff;
+  --particle-color-2: #00ffcc;
+  --particle-glow-1: rgba(0, 212, 255, 0.14);
+  --particle-glow-2: rgba(0, 255, 204, 0.1);
+  --particle-glow-3: rgba(0, 245, 255, 0.06);
+  --grid-color: rgba(0, 212, 255, 0.06);
+  --grid-opacity: 0.05;
+
+  --avatar-core-glow: rgba(0, 212, 255, 0.45);
+  --avatar-ring-opacity: 0.35;
+  --avatar-pulse-color: #00f5ff;
+
+  --nexus-cyan: #00ffcc;
+  --nexus-blue: #00d4ff;
+
+  --chart-fill: #00d4ff;
+  --chart-fill-secondary: #00ffcc;
+  --gauge-fill: #00f5ff;
+  --progress-fill: linear-gradient(90deg, #00ffcc, #00d4ff);
+}
+
+[data-theme='nexus'] body {
+  background-color: var(--surface-bg);
+  background-image: var(--bg-gradient-1), var(--bg-gradient-2);
+}
+
+[data-theme='nexus'] .holo-panel {
+  border-color: rgba(0, 212, 255, 0.12);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.04);
+}
+
+[data-theme='nexus'] .topnav {
+  border-bottom-color: rgba(0, 212, 255, 0.15);
+}
+
+[data-theme='nexus'] .avatar-ambient-glow,
+[data-theme='nexus'] .ai-core-ambient {
+  background: radial-gradient(circle, #00d4ff 0%, #00ffcc 40%, transparent 70%);
+  opacity: 0.5;
+  filter: blur(55px);
+}
+
+[data-theme='nexus'] .ai-core-svg {
+  filter: drop-shadow(0 0 20px #00f5ff) drop-shadow(0 0 40px rgba(0, 212, 255, 0.25));
+}
+
+[data-theme='nexus'] .ai-response-panel {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.06), var(--surface-elevated));
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.08);
+}
+
+[data-theme='nexus'] .ai-voice-bar {
+  background: linear-gradient(to top, #00ffcc, #00d4ff);
+}

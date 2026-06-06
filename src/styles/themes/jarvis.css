@@ -1,11 +1,496 @@
-html.theme-jarvis {
-  --accent: #00d4ff;
-  --accent-glow: rgba(0, 212, 255, 0.35);
-  --accent-dim: rgba(0, 212, 255, 0.12);
-  --nexus-cyan: #7dd3fc;
+/* ═══════════════════════════════════════════════════════════════
+   JARVIS — Iron Man Arc Reactor / HUD Command Lab
+   Scoped to [data-theme='jarvis']. Accent glow/highlight uses
+   user-selected --accent* vars; base palette is fixed warm HUD.
+   ═══════════════════════════════════════════════════════════════ */
+
+[data-theme='jarvis'] {
+  /* Fixed Jarvis palette (non-accent structural colors) */
+  --jarvis-gold: #ffd700;
+  --jarvis-chrome: #3d1a00;
+
+  --theme-primary: #ff4500;
+  --theme-secondary: #ffa500;
+  --theme-glow: #ffd700;
+  --theme-tertiary: #ff6b35;
+  --theme-primary-rgb: 255, 69, 0;
+  --theme-secondary-rgb: 255, 165, 0;
+  --theme-glow-rgb: 255, 215, 0;
+
+  --surface-bg: #030100;
+  --surface-panel: rgba(18, 6, 0, 0.88);
+  --surface-elevated: rgba(18, 6, 0, 0.92);
+  --surface-glass: rgba(18, 6, 0, 0.75);
+  --surface-overlay: rgba(3, 1, 0, 0.9);
+
+  --text-primary: #ffe4b5;
+  --text-secondary: #aa7744;
+  --text-muted: #aa7744;
+  --text-dim: #aa7744;
+
+  --border-subtle: rgba(61, 26, 0, 0.65);
+  --border-default: var(--jarvis-chrome);
+  --glow-intensity: 0.55;
+  --glass-blur: 14px;
+  --panel-gradient: linear-gradient(135deg, rgba(61, 26, 0, 0.35), transparent 60%);
+
+  --nexus-cyan: var(--jarvis-gold);
+  --nexus-blue: #ff6b35;
+
+  --scrollbar-track: rgba(61, 26, 0, 0.4);
+  --scrollbar-thumb: rgba(170, 119, 68, 0.45);
+
+  --grid-opacity: 0;
+  --hud-ring-color: transparent;
+  --scanline-opacity: 0;
 }
 
-html.theme-jarvis body {
-  background-color: #010812;
-  background-image: radial-gradient(ellipse at 50% 0%, rgba(0, 212, 255, 0.08), transparent 55%);
+/* ─── Full-screen warm arc-reactor background ─── */
+[data-theme='jarvis'] body,
+[data-theme='jarvis'] .app-container {
+  background-color: #030100;
+  background-image: radial-gradient(
+    ellipse at 30% 20%,
+    #1a0800 0%,
+    #080300 60%,
+    #030100 100%
+  );
+  color: var(--text-primary);
+}
+
+/* Animated energy grid — accent at 0.025 opacity, 8s pulse */
+[data-theme='jarvis'] .particle-grid {
+  opacity: 1;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 39px,
+      rgba(var(--accent-rgb), 0.025) 39px,
+      rgba(var(--accent-rgb), 0.025) 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 39px,
+      rgba(var(--accent-rgb), 0.025) 39px,
+      rgba(var(--accent-rgb), 0.025) 40px
+    );
+  background-size: 40px 40px;
+  animation: jarvis-grid-pulse 8s ease-in-out infinite;
+}
+
+@keyframes jarvis-grid-pulse {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+/* Hide framer-motion particles; render 15 CSS accent dots */
+[data-theme='jarvis'] .particle-dot {
+  display: none !important;
+}
+
+[data-theme='jarvis'] .particle-field-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-image:
+    radial-gradient(circle, var(--accent) 1px, transparent 1px),
+    radial-gradient(circle, var(--accent) 1px, transparent 1px),
+    radial-gradient(circle, var(--accent) 1px, transparent 1px),
+    radial-gradient(circle, var(--accent) 1px, transparent 1px),
+    radial-gradient(circle, var(--accent) 1px, transparent 1px),
+    radial-gradient(circle, var(--accent) 1px, transparent 1px),
+    radial-gradient(circle, var(--accent) 1px, transparent 1px),
+    radial-gradient(circle, var(--accent) 1px, transparent 1px),
+    radial-gradient(circle, var(--accent) 1px, transparent 1px),
+    radial-gradient(circle, var(--accent) 1px, transparent 1px),
+    radial-gradient(circle, var(--accent) 1px, transparent 1px),
+    radial-gradient(circle, var(--accent) 1px, transparent 1px),
+    radial-gradient(circle, var(--accent) 1px, transparent 1px),
+    radial-gradient(circle, var(--accent) 1px, transparent 1px),
+    radial-gradient(circle, var(--accent) 1px, transparent 1px);
+  background-size: 2px 2px;
+  background-position:
+    8% 92%, 18% 78%, 28% 88%, 38% 72%, 48% 95%,
+    58% 80%, 68% 90%, 78% 74%, 88% 86%, 12% 65%,
+    32% 58%, 52% 68%, 72% 62%, 92% 70%, 45% 82%;
+  animation: jarvis-particles-rise 18s linear infinite;
+  filter: drop-shadow(0 0 3px var(--accent-glow));
+}
+
+@keyframes jarvis-particles-rise {
+  0% { transform: translateY(0); opacity: 0.15; }
+  25% { opacity: 0.55; }
+  100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+/* Top-left HUD system label + blinking cursor */
+[data-theme='jarvis'] .particle-field-container::before {
+  content: 'J.A.R.V.I.S // ONLINE';
+  position: absolute;
+  top: calc(4.25rem + env(safe-area-inset-top, 0px));
+  left: var(--space-6);
+  z-index: 2;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  pointer-events: none;
+  text-shadow: 0 0 8px var(--accent-glow);
+  white-space: nowrap;
+  padding-right: 0.35em;
+  border-right: 2px solid var(--accent);
+  animation: jarvis-cursor-blink 1s step-end infinite;
+}
+
+@keyframes jarvis-cursor-blink {
+  0%, 100% { border-right-color: var(--accent); }
+  50% { border-right-color: transparent; }
+}
+
+/* Soften ambient glow blobs — grid + particles carry the mood */
+[data-theme='jarvis'] .particle-glow {
+  opacity: 0.35;
+}
+
+/* ─── Cards & panels — military HUD chrome ─── */
+[data-theme='jarvis'] .holo-panel,
+[data-theme='jarvis'] .ui-card,
+[data-theme='jarvis'] .ui-holo-card,
+[data-theme='jarvis'] .dash-kpi-card,
+[data-theme='jarvis'] .dash-module-card,
+[data-theme='jarvis'] .ai-response-panel,
+[data-theme='jarvis'] .initializing-card,
+[data-theme='jarvis'] .ui-modal-panel,
+[data-theme='jarvis'] .topnav-dropdown-menu,
+[data-theme='jarvis'] .ui-toast,
+[data-theme='jarvis'] .mobile-drawer {
+  position: relative;
+  background: rgba(18, 6, 0, 0.88) !important;
+  border: 1px solid var(--accent-border) !important;
+  border-top: 2px solid var(--accent) !important;
+  border-radius: 2px !important;
+  clip-path: none !important;
+  box-shadow:
+    0 0 15px var(--accent-dim),
+    inset 0 0 10px rgba(0, 0, 0, 0.5);
+  transition:
+    box-shadow var(--transition-base),
+    transform var(--transition-base),
+    border-color var(--transition-theme);
+}
+
+[data-theme='jarvis'] .holo-panel:hover,
+[data-theme='jarvis'] .ui-card:hover,
+[data-theme='jarvis'] .ui-holo-card:hover,
+[data-theme='jarvis'] .dash-kpi-card:hover,
+[data-theme='jarvis'] .dash-module-card:hover:not(.is-disabled),
+[data-theme='jarvis'] .ai-response-panel:hover,
+[data-theme='jarvis'] .ui-modal-panel:hover,
+[data-theme='jarvis'] .ui-toast:hover {
+  box-shadow:
+    0 0 25px var(--accent-glow),
+    inset 0 0 10px rgba(0, 0, 0, 0.5);
+  transform: translateY(-1px);
+}
+
+/* Bottom-right L-bracket decoration per card */
+[data-theme='jarvis'] .holo-panel::before,
+[data-theme='jarvis'] .ui-card::before,
+[data-theme='jarvis'] .ui-holo-card::before,
+[data-theme='jarvis'] .dash-kpi-card::before,
+[data-theme='jarvis'] .dash-module-card::before,
+[data-theme='jarvis'] .ai-response-panel::before,
+[data-theme='jarvis'] .initializing-card::before,
+[data-theme='jarvis'] .ui-modal-panel::before,
+[data-theme='jarvis'] .ui-toast::before {
+  content: '';
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  width: 12px;
+  height: 3px;
+  background: var(--accent);
+  pointer-events: none;
+  z-index: 3;
+}
+
+[data-theme='jarvis'] .holo-panel::after,
+[data-theme='jarvis'] .ui-card::after,
+[data-theme='jarvis'] .ui-holo-card::after,
+[data-theme='jarvis'] .dash-kpi-card::after,
+[data-theme='jarvis'] .dash-module-card::after,
+[data-theme='jarvis'] .ai-response-panel::after,
+[data-theme='jarvis'] .initializing-card::after,
+[data-theme='jarvis'] .ui-modal-panel::after,
+[data-theme='jarvis'] .ui-toast::after {
+  content: '';
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  width: 3px;
+  height: 12px;
+  background: var(--accent);
+  pointer-events: none;
+  z-index: 3;
+}
+
+[data-theme='jarvis'] .holo-panel-header {
+  border-bottom-color: var(--jarvis-chrome);
+  background: linear-gradient(90deg, rgba(61, 26, 0, 0.4), transparent);
+}
+
+[data-theme='jarvis'] .holo-panel-title,
+[data-theme='jarvis'] .holo-panel-icon {
+  color: var(--accent);
+  text-shadow: 0 0 8px var(--accent-glow);
+}
+
+/* ─── Navigation bar ─── */
+[data-theme='jarvis'] .topnav,
+[data-theme='jarvis'] .command-ribbon {
+  background: rgba(8, 3, 0, 0.97) !important;
+  border-bottom: 2px solid var(--accent) !important;
+  box-shadow: 0 2px 20px var(--accent-glow);
+  backdrop-filter: blur(12px);
+}
+
+[data-theme='jarvis'] .topnav-link {
+  color: #aa7744;
+}
+
+[data-theme='jarvis'] .topnav-link:hover {
+  color: var(--text-primary);
+}
+
+[data-theme='jarvis'] .topnav-link.is-active,
+[data-theme='jarvis'] .mobile-drawer-link.is-active {
+  color: var(--accent);
+  text-shadow: 0 0 10px var(--accent);
+}
+
+[data-theme='jarvis'] .topnav-logo-text {
+  color: var(--text-primary);
+  text-shadow: 0 0 12px var(--accent-glow), 0 0 24px var(--accent-dim);
+}
+
+[data-theme='jarvis'] .topnav-profile-name {
+  color: var(--text-primary);
+}
+
+[data-theme='jarvis'] .command-ribbon-module-btn {
+  color: #aa7744;
+}
+
+[data-theme='jarvis'] .command-ribbon-module-btn.is-active {
+  color: var(--accent);
+  text-shadow: 0 0 8px var(--accent-glow);
+}
+
+/* ─── HUD targeting system — AI Core area ─── */
+[data-theme='jarvis'] .ai-core-sphere::before {
+  content: '';
+  position: absolute;
+  inset: 3%;
+  pointer-events: none;
+  z-index: 6;
+  background:
+    linear-gradient(var(--accent), var(--accent)) 0 0 / 12px 2px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) 0 0 / 2px 12px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) 100% 0 / 12px 2px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) 100% 0 / 2px 12px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) 0 100% / 12px 2px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) 0 100% / 2px 12px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) 100% 100% / 12px 2px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) 100% 100% / 2px 12px no-repeat;
+}
+
+[data-theme='jarvis'] .ai-core-ring--outer {
+  inset: -4%;
+  border: 2px solid var(--accent);
+  opacity: 1;
+  animation: jarvis-ring-1 8s linear infinite;
+}
+
+[data-theme='jarvis'] .ai-core-ring--mid {
+  inset: 1%;
+  border: 1px dashed var(--accent);
+  opacity: 0.6;
+  animation: jarvis-ring-2 14s linear infinite reverse;
+}
+
+[data-theme='jarvis'] .ai-core-ring--inner {
+  inset: 6%;
+  border: 1px dotted var(--jarvis-gold);
+  opacity: 0.4;
+  animation: jarvis-ring-3 22s linear infinite;
+}
+
+@keyframes jarvis-ring-1 {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes jarvis-ring-2 {
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes jarvis-ring-3 {
+  to { transform: rotate(360deg); }
+}
+
+/* Scanning beam — top to bottom over sphere */
+[data-theme='jarvis'] .ai-core-scanner {
+  opacity: 1;
+  overflow: hidden;
+}
+
+[data-theme='jarvis'] .ai-core-scanner::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(transparent, var(--accent-glow), transparent);
+  animation: jarvis-scan-beam 3s linear infinite;
+  transform: none;
+}
+
+@keyframes jarvis-scan-beam {
+  0% { top: -40px; opacity: 0.3; }
+  50% { opacity: 0.85; }
+  100% { top: 100%; opacity: 0.3; }
+}
+
+[data-theme='jarvis'] .ai-core-ambient {
+  background: radial-gradient(circle, var(--accent-glow) 0%, var(--accent-dim) 45%, transparent 70%);
+  opacity: 0.75;
+  filter: blur(55px);
+}
+
+[data-theme='jarvis'] .ai-core-svg {
+  color: var(--accent);
+  filter: drop-shadow(0 0 24px var(--accent-glow)) drop-shadow(0 0 48px var(--accent-dim));
+}
+
+[data-theme='jarvis'] .ai-voice-bar {
+  background: linear-gradient(to top, color-mix(in srgb, var(--accent) 60%, black), var(--accent));
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+[data-theme='jarvis'] .ai-command-greeting {
+  color: var(--text-primary);
+  text-shadow: 0 0 12px var(--accent-glow);
+}
+
+[data-theme='jarvis'] .particle-hud-ring,
+[data-theme='jarvis'] .particle-scanner {
+  opacity: 0;
+}
+
+/* ─── Buttons — arc-reactor gradient ─── */
+[data-theme='jarvis'] .ui-btn,
+[data-theme='jarvis'] .ui-btn--primary,
+[data-theme='jarvis'] .ai-mic-button:not(.is-error):not(.is-processing),
+[data-theme='jarvis'] .mic-button:not(.is-error):not(.is-processing),
+[data-theme='jarvis'] .settings-segment-btn.is-active,
+[data-theme='jarvis'] .command-ribbon-module-btn.is-active {
+  background: linear-gradient(
+    135deg,
+    var(--accent),
+    color-mix(in srgb, var(--accent) 60%, black)
+  ) !important;
+  border: 1px solid var(--accent-strong) !important;
+  box-shadow: 0 0 10px var(--accent-dim);
+  color: #ffe4b5 !important;
+}
+
+[data-theme='jarvis'] .ui-btn:hover:not(:disabled),
+[data-theme='jarvis'] .ui-btn--primary:hover:not(:disabled),
+[data-theme='jarvis'] .ai-mic-button:hover:not(:disabled):not(.is-error):not(.is-processing),
+[data-theme='jarvis'] .mic-button:hover:not(.is-disabled):not(:disabled):not(.is-error):not(.is-processing),
+[data-theme='jarvis'] .command-ribbon-module-btn.is-active:hover {
+  box-shadow: 0 0 20px var(--accent-glow) !important;
+}
+
+[data-theme='jarvis'] .settings-segment-btn {
+  color: #aa7744;
+  border-color: var(--jarvis-chrome);
+}
+
+[data-theme='jarvis'] .settings-segment-btn:hover {
+  color: var(--text-primary);
+}
+
+[data-theme='jarvis'] .ai-mic-button.is-listening,
+[data-theme='jarvis'] .ai-mic-button.is-speaking {
+  box-shadow: 0 0 24px var(--accent-glow) !important;
+}
+
+/* ─── Status dots — pulsing accent rings ─── */
+[data-theme='jarvis'] .topnav-status-dot,
+[data-theme='jarvis'] .topnav-logo-dot,
+[data-theme='jarvis'] .topnav-avatar-status,
+[data-theme='jarvis'] .holo-panel-dot,
+[data-theme='jarvis'] .command-ribbon-dot,
+[data-theme='jarvis'] .initializing-dot,
+[data-theme='jarvis'] .ui-status:not(.ui-status--warning):not(.ui-status--error):not(.ui-status--offline) .ui-status-dot {
+  width: 10px;
+  height: 10px;
+  background: transparent !important;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  box-shadow:
+    0 0 6px var(--accent),
+    inset 0 0 3px var(--accent-dim);
+  animation: jarvis-status-pulse 2s ease-in-out infinite;
+}
+
+[data-theme='jarvis'] .ui-status--warning .ui-status-dot {
+  border-color: #f59e0b;
+  box-shadow: 0 0 6px #f59e0b, inset 0 0 3px rgba(245, 158, 11, 0.3);
+}
+
+[data-theme='jarvis'] .ui-status--error .ui-status-dot {
+  border-color: var(--nexus-red);
+  box-shadow: 0 0 6px var(--nexus-red), inset 0 0 3px rgba(255, 0, 60, 0.3);
+}
+
+[data-theme='jarvis'] .holo-panel-dot:nth-child(2) { animation-delay: 0.35s; }
+[data-theme='jarvis'] .holo-panel-dot:nth-child(3) { animation-delay: 0.7s; }
+[data-theme='jarvis'] .command-ribbon-dot { animation-delay: 0.2s; }
+
+@keyframes jarvis-status-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.85; }
+}
+
+/* Fixed gold for non-dynamic Jarvis chrome accents */
+[data-theme='jarvis'] .ai-response-streaming,
+[data-theme='jarvis'] .ai-response-complete {
+  color: var(--jarvis-gold);
+}
+
+[data-theme='jarvis'] .topnav-status-pill {
+  border-color: var(--jarvis-chrome);
+  background: rgba(18, 6, 0, 0.6);
+}
+
+[data-theme='jarvis'] .holo-panel-bracket {
+  display: none;
+}
+
+[data-theme='jarvis'] .dash-progress-fill {
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+[data-theme='jarvis'] .topnav-profile-menu-btn:hover {
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+[data-theme='jarvis'] .topnav-profile-section {
+  border-left-color: var(--jarvis-chrome);
 }

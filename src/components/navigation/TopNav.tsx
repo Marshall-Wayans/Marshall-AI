@@ -27,7 +27,7 @@ export const TopNav: React.FC = () => {
   }
 
   const isActive = (path: string) => {
-    if (path === ROUTES.missionControl) return location.pathname === '/'
+    if (path === ROUTES.aiCommand) return location.pathname === '/'
     return location.pathname === path
   }
 

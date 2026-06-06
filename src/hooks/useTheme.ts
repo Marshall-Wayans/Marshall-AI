@@ -1,13 +1,15 @@
 import { useEffect } from 'react'
-import { ACCENT_HEX, VISUAL_THEME_CLASS } from '@/constants'
+import { normalizeVisualTheme, VISUAL_THEME_CLASS } from '@/constants'
 import { useSettingsStore } from '@/store'
-import { hexToRgb } from '@/utils'
+import { applyAccentVariables, persistAccent } from '@/utils/accent'
 
 export const useTheme = () => {
   const settings = useSettingsStore((s) => s.settings)
 
   useEffect(() => {
     const html = document.documentElement
+    const theme = normalizeVisualTheme(settings.visualTheme)
+
     html.classList.remove('text-sm', 'text-md', 'text-lg')
     html.classList.add(`text-${settings.fontSize}`)
 
@@ -19,14 +21,17 @@ export const useTheme = () => {
     }
 
     Object.values(VISUAL_THEME_CLASS).forEach((cls) => html.classList.remove(cls))
-    html.classList.add(VISUAL_THEME_CLASS[settings.visualTheme])
+    html.classList.add(VISUAL_THEME_CLASS[theme])
+    html.setAttribute('data-theme', theme)
 
-    const hex = ACCENT_HEX[settings.accentColor]
-    const rgb = hexToRgb(hex)
-    html.style.setProperty('--accent', hex)
-    html.style.setProperty('--accent-rgb', rgb)
-    html.style.setProperty('--accent-glow', `rgba(${rgb}, 0.25)`)
-    html.style.setProperty('--accent-dim', `rgba(${rgb}, 0.08)`)
+    applyAccentVariables(settings.accentColor)
+    persistAccent(settings.accentColor)
+
+    html.classList.add('theme-transitioning')
+    const timer = window.setTimeout(() => {
+      html.classList.remove('theme-transitioning')
+    }, 600)
+    return () => window.clearTimeout(timer)
   }, [settings])
 
   return settings

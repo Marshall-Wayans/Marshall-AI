@@ -1,2 +1,5 @@
 export { useTheme } from './useTheme'
 export { pageTransitionVariants, pageTransitionConfig } from './usePageTransition'
+export { useSimulationEngine } from './useSimulationEngine'
+export { useAIResponses } from './useAIResponses'
+export { useStreamingText } from './useStreamingText'

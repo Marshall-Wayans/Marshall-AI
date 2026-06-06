@@ -4,9 +4,9 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   padding: var(--space-3) var(--space-6);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.05);
-  color: #e2e8f0;
+  border: 1px solid var(--border-default);
+  background: var(--surface-glass);
+  color: var(--text-primary);
   cursor: pointer;
   transition: var(--transition-fast);
   clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
@@ -24,7 +24,7 @@
 }
 
 .ui-btn--primary {
-  background: rgba(var(--accent-rgb, 0, 240, 255), 0.15);
+  background: rgba(var(--accent-rgb), 0.15);
   border-color: var(--accent);
   color: var(--accent);
 }
@@ -35,9 +35,9 @@
 
 .ui-card {
   position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: var(--nexus-dark);
-  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-panel);
+  backdrop-filter: blur(var(--glass-blur));
 }
 
 .ui-panel {
@@ -56,9 +56,10 @@
   padding: 0 0.35rem;
   font-family: var(--font-mono);
   font-size: 9px;
-  background: var(--nexus-magenta);
+  background: var(--theme-primary);
   color: #fff;
   border-radius: var(--radius-full);
+  box-shadow: 0 0 8px var(--accent-glow);
 }
 
 .ui-status {
@@ -79,7 +80,7 @@
 
 .ui-status--warning .ui-status-dot { background: #f59e0b; }
 .ui-status--error .ui-status-dot { background: var(--nexus-red); }
-.ui-status--offline .ui-status-dot { background: #64748b; }
+.ui-status--offline .ui-status-dot { background: var(--text-muted); }
 
 .ui-loading-overlay {
   position: fixed;
@@ -88,14 +89,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(2, 4, 10, 0.72);
+  background: var(--surface-overlay);
   backdrop-filter: blur(4px);
 }
 
 .ui-loading-spinner {
   width: 48px;
   height: 48px;
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  border: 2px solid var(--border-default);
   border-top-color: var(--accent);
   border-radius: 50%;
   animation: ui-spin 0.8s linear infinite;
@@ -113,24 +114,24 @@
   content: '';
   position: absolute;
   inset: -1px;
-  background: linear-gradient(135deg, var(--accent), transparent 60%);
-  opacity: 0.35;
+  background: linear-gradient(135deg, var(--accent), var(--accent-secondary), transparent 60%);
+  opacity: calc(var(--glow-intensity) + 0.1);
   z-index: -1;
   clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
 }
 
 .ui-holo-card {
   position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), transparent);
-  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  background: var(--panel-gradient);
+  backdrop-filter: blur(var(--glass-blur));
 }
 
 .ui-modal-backdrop {
   position: fixed;
   inset: 0;
   z-index: var(--z-modal);
-  background: rgba(2, 4, 10, 0.75);
+  background: var(--surface-overlay);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -142,8 +143,10 @@
   max-width: 32rem;
   width: 100%;
   padding: var(--space-8);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: var(--nexus-dark);
+  border: 1px solid var(--border-default);
+  background: var(--surface-elevated);
+  backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--shadow-theme);
 }
 
 .ui-toast-stack {
@@ -161,18 +164,19 @@
 .ui-toast {
   pointer-events: auto;
   padding: var(--space-4);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(2, 4, 10, 0.92);
-  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-default);
+  background: var(--surface-elevated);
+  backdrop-filter: blur(var(--glass-blur));
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  box-shadow: var(--shadow-theme);
 }
 
-.ui-toast--success { border-left: 3px solid var(--nexus-cyan); }
+.ui-toast--success { border-left: 3px solid var(--theme-secondary); }
 .ui-toast--warning { border-left: 3px solid #f59e0b; }
 .ui-toast--error { border-left: 3px solid var(--nexus-red); }
-.ui-toast--info { border-left: 3px solid var(--nexus-blue); }
+.ui-toast--info { border-left: 3px solid var(--theme-primary); }
 
 .ui-toast-title {
   font-family: var(--font-orbitron);
@@ -182,5 +186,5 @@
 }
 
 .ui-toast-message {
-  color: #cbd5e1;
+  color: var(--text-secondary);
 }

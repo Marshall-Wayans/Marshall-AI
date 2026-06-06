@@ -2,14 +2,15 @@
   width: 100%;
   height: 100vh;
   height: 100dvh;
-  background-color: var(--nexus-black);
-  color: #ffffff;
+  background-color: var(--surface-bg);
+  color: var(--text-primary);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   position: relative;
   font-family: var(--font-sans);
 }
+
 .app-main {
   flex: 1;
   position: relative;
@@ -18,6 +19,7 @@
   display: flex;
   flex-direction: column;
 }
+
 .app-initializing {
   height: 100%;
   display: flex;
@@ -25,15 +27,18 @@
   justify-content: center;
   padding: var(--space-6);
 }
+
 .initializing-card {
   position: relative;
   padding: var(--space-10) var(--space-12);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  background-color: var(--nexus-dark);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  background-color: var(--surface-panel);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
   text-align: center;
+  box-shadow: var(--shadow-theme);
 }
+
 .initializing-title {
   font-family: var(--font-orbitron);
   font-size: var(--text-3xl);
@@ -43,19 +48,22 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
+
 @media (min-width: 768px) {
   .initializing-title {
     font-size: var(--text-5xl);
   }
 }
+
 .initializing-status {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-3);
   font-family: var(--font-mono);
-  color: #94a3b8;
+  color: var(--text-dim);
 }
+
 .initializing-dot {
   width: 8px;
   height: 8px;
@@ -63,6 +71,7 @@
   border-radius: 50%;
   box-shadow: var(--shadow-neon);
 }
+
 /* Reusable Corner Brackets */
 .corner-bracket {
   position: absolute;
@@ -71,24 +80,28 @@
   border-color: var(--accent);
   opacity: 0.7;
 }
+
 .corner-bracket.top-left {
   top: 0;
   left: 0;
   border-top: 2px solid;
   border-left: 2px solid;
 }
+
 .corner-bracket.top-right {
   top: 0;
   right: 0;
   border-top: 2px solid;
   border-right: 2px solid;
 }
+
 .corner-bracket.bottom-left {
   bottom: 0;
   left: 0;
   border-bottom: 2px solid;
   border-left: 2px solid;
 }
+
 .corner-bracket.bottom-right {
   bottom: 0;
   right: 0;

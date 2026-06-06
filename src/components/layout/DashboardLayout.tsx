@@ -2,6 +2,7 @@ import { Navigate } from 'react-router-dom'
 import { useAuth } from '@/contexts/AuthContext'
 import { ROUTES } from '@/constants'
 import { TopNav } from '@/components/navigation/TopNav'
+import { CommandRibbon } from '@/components/navigation/CommandRibbon'
 import { PageContainer } from './PageContainer'
 
 export const DashboardLayout = () => {
@@ -14,6 +15,7 @@ export const DashboardLayout = () => {
   return (
     <>
       <TopNav />
+      <CommandRibbon />
       <PageContainer />
     </>
   )

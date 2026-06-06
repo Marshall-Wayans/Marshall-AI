@@ -1,0 +1,139 @@
+/* ═══ Theme-specific background effects (GPU-friendly) ═══ */
+
+/* HUD rings — Jarvis */
+.particle-hud-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid var(--hud-ring-color, transparent);
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform;
+}
+
+.particle-hud-ring--outer {
+  top: 50%;
+  left: 50%;
+  width: 80vmin;
+  height: 80vmin;
+  transform: translate(-50%, -50%);
+  animation: hud-ring-rotate 60s linear infinite;
+}
+
+.particle-hud-ring--inner {
+  top: 50%;
+  left: 50%;
+  width: 55vmin;
+  height: 55vmin;
+  transform: translate(-50%, -50%);
+  border-style: dashed;
+  animation: hud-ring-rotate 40s linear infinite reverse;
+}
+
+.particle-hud-ring--mid {
+  top: 50%;
+  left: 50%;
+  width: 68vmin;
+  height: 68vmin;
+  transform: translate(-50%, -50%);
+  border-width: 1px;
+  border-color: rgba(var(--theme-secondary-rgb), 0.12);
+  animation: hud-ring-rotate 25s linear infinite;
+}
+
+@keyframes hud-ring-rotate {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Radar scanner — Jarvis */
+.particle-scanner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70vmin;
+  height: 70vmin;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+  will-change: transform;
+}
+
+.particle-scanner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(var(--theme-primary-rgb), 0.15) 30deg,
+    transparent 60deg
+  );
+  animation: radar-sweep 4s linear infinite;
+}
+
+@keyframes radar-sweep {
+  to { transform: rotate(360deg); }
+}
+
+/* Scanlines — Cyberpunk */
+.particle-scanlines {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 255, 255, var(--scanline-opacity, 0)) 2px,
+    rgba(0, 255, 255, var(--scanline-opacity, 0)) 4px
+  );
+  animation: scanline-scroll 8s linear infinite;
+  will-change: background-position;
+}
+
+@keyframes scanline-scroll {
+  to { background-position: 0 100px; }
+}
+
+/* Glitch pulse — Cyberpunk */
+.particle-glitch-pulse {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 0, 128, 0.03) 45%,
+    rgba(0, 255, 255, 0.03) 55%,
+    transparent 100%
+  );
+  animation: glitch-pulse 6s ease-in-out infinite;
+}
+
+@keyframes glitch-pulse {
+  0%, 90%, 100% { opacity: 0; transform: translateX(0); }
+  91% { opacity: 1; transform: translateX(-3px); }
+  92% { opacity: 0.5; transform: translateX(3px); }
+  93% { opacity: 0; transform: translateX(0); }
+}
+
+/* Nexus holographic shimmer on panels */
+[data-theme='nexus'] .holo-panel-header {
+  background: linear-gradient(
+    90deg,
+    rgba(var(--theme-primary-rgb), 0.06),
+    transparent 40%,
+    rgba(var(--theme-secondary-rgb), 0.04) 60%,
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: nexus-shimmer 8s ease-in-out infinite;
+}
+
+@keyframes nexus-shimmer {
+  0%, 100% { background-position: 0% 0; }
+  50% { background-position: 100% 0; }
+}

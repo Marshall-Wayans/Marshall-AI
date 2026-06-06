@@ -1,0 +1,97 @@
+.app-container {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  background-color: var(--nexus-black);
+  color: #ffffff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  font-family: var(--font-sans);
+}
+.app-main {
+  flex: 1;
+  position: relative;
+  z-index: var(--z-base);
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.app-initializing {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+}
+.initializing-card {
+  position: relative;
+  padding: var(--space-10) var(--space-12);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: var(--nexus-dark);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  text-align: center;
+}
+.initializing-title {
+  font-family: var(--font-orbitron);
+  font-size: var(--text-3xl);
+  color: var(--accent);
+  text-shadow: var(--shadow-glow);
+  margin-bottom: var(--space-6);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+@media (min-width: 768px) {
+  .initializing-title {
+    font-size: var(--text-5xl);
+  }
+}
+.initializing-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  color: #94a3b8;
+}
+.initializing-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent);
+  border-radius: 50%;
+  box-shadow: var(--shadow-neon);
+}
+/* Reusable Corner Brackets */
+.corner-bracket {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-color: var(--accent);
+  opacity: 0.7;
+}
+.corner-bracket.top-left {
+  top: 0;
+  left: 0;
+  border-top: 2px solid;
+  border-left: 2px solid;
+}
+.corner-bracket.top-right {
+  top: 0;
+  right: 0;
+  border-top: 2px solid;
+  border-right: 2px solid;
+}
+.corner-bracket.bottom-left {
+  bottom: 0;
+  left: 0;
+  border-bottom: 2px solid;
+  border-left: 2px solid;
+}
+.corner-bracket.bottom-right {
+  bottom: 0;
+  right: 0;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+}

@@ -1,0 +1,76 @@
+/* CSS Custom Properties - Single Source of Truth */
+:root {
+  /* Accent Colors - Default Cyan */
+  --accent: #00f0ff;
+  --accent-glow: rgba(0, 240, 255, 0.25);
+  --accent-dim: rgba(0, 240, 255, 0.08);
+  /* Base Colors */
+  --nexus-black: #02040a;
+  --nexus-dark: rgba(2, 4, 10, 0.65);
+  --nexus-cyan: #06fff0;
+  --nexus-blue: #00d4ff;
+  --nexus-purple: #a855f7;
+  --nexus-magenta: #ff00ea;
+  --nexus-red: #ff003c;
+  /* Typography */
+  --font-orbitron: 'Chakra Petch', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --font-sans: 'Inter', sans-serif;
+  /* Spacing Scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  /* Border Radius */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-full: 9999px;
+  /* Shadows */
+  --shadow-neon: 0 0 10px var(--accent-glow), inset 0 0 10px var(--accent-dim);
+  --shadow-glow: 0 0 15px var(--accent);
+  /* Z-index Scale */
+  --z-base: 0;
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-modal: 30;
+  --z-toast: 40;
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 300ms ease;
+  --transition-slow: 500ms ease;
+  /* Font Sizes - Base 16px */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+}
+/* Font Size Scaling */
+html.text-sm {
+  font-size: 14px;
+}
+html.text-md {
+  font-size: 16px;
+}
+html.text-lg {
+  font-size: 18px;
+}
+/* Light Theme Overrides */
+html.light {
+  --nexus-black: #f5f8fc;
+  --nexus-dark: rgba(245, 248, 252, 0.85);
+  color: #0a0a0a;
+}
+html.light body {
+  background-color: #ffffff;
+  color: #0a0a0a;
+}

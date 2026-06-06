@@ -1,0 +1,61 @@
+/* FONT IMPORTS */
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap');
+
+@import './styles/variables.css';
+@import './styles/base.css';
+@import './styles/themes/cyberpunk.css';
+@import './styles/themes/jarvis.css';
+@import './styles/ui/primitives.css';
+@import './styles/responsive.css';
+@import './styles/App.css';
+
+/* Global resets */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: #02040a;
+  color: #e2e8f0;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: rgba(0, 212, 255, 0.05); }
+::-webkit-scrollbar-thumb { background: rgba(0, 212, 255, 0.3); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0, 212, 255, 0.6); }
+
+/* Glow utilities */
+.text-glow-cyan    { text-shadow: 0 0 8px rgba(6, 255, 240, 0.6); }
+.text-glow-blue    { text-shadow: 0 0 8px rgba(0, 212, 255, 0.6); }
+.text-glow-purple  { text-shadow: 0 0 8px rgba(168, 85, 247, 0.6); }
+.text-glow-magenta { text-shadow: 0 0 8px rgba(255, 0, 234, 0.6); }
+
+.scanlines {
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0),
+    rgba(255,255,255,0) 50%,
+    rgba(0,0,0,0.15) 50%,
+    rgba(0,0,0,0.15)
+  );
+  background-size: 100% 4px;
+}
+
+.clip-hex {
+  clip-path: polygon(10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0 50%);
+}
+
+.clip-angled {
+  clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+}

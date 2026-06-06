@@ -1,0 +1,11 @@
+html.theme-jarvis {
+  --accent: #00d4ff;
+  --accent-glow: rgba(0, 212, 255, 0.35);
+  --accent-dim: rgba(0, 212, 255, 0.12);
+  --nexus-cyan: #7dd3fc;
+}
+
+html.theme-jarvis body {
+  background-color: #010812;
+  background-image: radial-gradient(ellipse at 50% 0%, rgba(0, 212, 255, 0.08), transparent 55%);
+}

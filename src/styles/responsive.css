@@ -1,0 +1,86 @@
+/* Responsive Breakpoints */
+
+/* Mobile S: 320px */
+@media (max-width: 374px) {
+  :root {
+    --text-xs: 0.625rem;
+    --text-sm: 0.75rem;
+    --text-base: 0.875rem;
+  }
+}
+/* Mobile M: 375px */
+@media (min-width: 375px) and (max-width: 424px) {
+  :root {
+    --text-xs: 0.6875rem;
+    --text-sm: 0.8125rem;
+  }
+}
+/* Mobile L: 425px */
+@media (min-width: 425px) and (max-width: 767px) {
+  /* Default mobile styles */
+}
+/* Tablet: 768px */
+@media (min-width: 768px) and (max-width: 1023px) {
+  :root {
+    --space-4: 1.25rem;
+    --space-6: 1.75rem;
+  }
+}
+/* Laptop: 1024px */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  :root {
+    --space-4: 1.5rem;
+    --space-6: 2rem;
+  }
+}
+/* Laptop L: 1440px */
+@media (min-width: 1440px) and (max-width: 2559px) {
+  :root {
+    --space-4: 1.75rem;
+    --space-8: 2.5rem;
+  }
+}
+/* 4K/Desktop: 2560px */
+@media (min-width: 2560px) {
+  :root {
+    font-size: 18px;
+    --space-4: 2rem;
+    --space-8: 3rem;
+  }
+}
+/* Mobile-First Utilities */
+@media (max-width: 767px) {
+  .app-main {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .view-container {
+    padding: var(--space-4);
+    min-height: 0;
+  }
+  .mission-control-layout {
+    overflow-y: auto;
+  }
+  .ui-toast-stack {
+    left: var(--space-4);
+    right: var(--space-4);
+    max-width: none;
+  }
+  .mobile-hidden {
+    display: none !important;
+  }
+  .mobile-full-width {
+    width: 100% !important;
+  }
+  .mobile-stack {
+    flex-direction: column !important;
+  }
+  .mobile-text-center {
+    text-align: center !important;
+  }
+}
+@media (min-width: 768px) {
+  .desktop-hidden {
+    display: none !important;
+  }
+}

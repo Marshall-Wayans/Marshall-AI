@@ -1,0 +1,258 @@
+.avatar-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 4vw, 2rem);
+  gap: clamp(1.5rem, 3vh, 2.5rem);
+}
+/* Top: Greeting section */
+.avatar-greeting-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: var(--z-sticky);
+  flex-shrink: 0;
+}
+.avatar-greeting {
+  font-family: var(--font-orbitron);
+  font-size: clamp(1rem, 3vw, 1.75rem);
+  letter-spacing: 0.3em;
+  color: #ffffff;
+  text-shadow: var(--shadow-glow);
+  text-align: center;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+.avatar-time-sync {
+  font-family: var(--font-mono);
+  font-size: clamp(0.625rem, 1.5vw, 0.75rem);
+  color: var(--accent);
+  margin-top: var(--space-3);
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 2vw, 1rem);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.avatar-sync-dot {
+  width: 4px;
+  height: 4px;
+  background-color: var(--accent);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+/* Middle: Core hologram */
+.avatar-core-wrapper {
+  position: relative;
+  width: clamp(220px, 50vh, 420px);
+  height: clamp(220px, 50vh, 420px);
+  max-width: 90vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-dropdown);
+  flex-shrink: 0;
+  margin: auto 0;
+}
+.avatar-ambient-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.5;
+  background-color: var(--accent);
+}
+.avatar-svg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  filter: drop-shadow(0 0 15px currentColor);
+  color: var(--accent);
+}
+/* Bottom: Status, transcript, mic */
+.avatar-bottom-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: var(--z-sticky);
+  width: 100%;
+  max-width: 42rem;
+  flex-shrink: 0;
+  gap: clamp(0.75rem, 2vh, 1.25rem);
+}
+.avatar-state-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.avatar-state-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  box-shadow: var(--shadow-glow);
+  flex-shrink: 0;
+}
+.avatar-state-text {
+  font-family: var(--font-orbitron);
+  font-size: clamp(0.625rem, 1.5vw, 0.875rem);
+  letter-spacing: 0.35em;
+  color: var(--accent);
+  text-shadow: var(--shadow-glow);
+  white-space: nowrap;
+}
+.avatar-waveform {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 28px;
+}
+.avatar-waveform-bar {
+  width: 3px;
+  border-radius: 2px 2px 0 0;
+  background-color: var(--accent);
+}
+.avatar-transcript {
+  text-align: center;
+  min-height: 1.5rem;
+  max-width: 90%;
+  padding: 0 var(--space-4);
+}
+.avatar-transcript-user {
+  font-family: var(--font-mono);
+  font-size: clamp(0.625rem, 1.5vw, 0.8125rem);
+  color: #94a3b8;
+  letter-spacing: 0.05em;
+  line-height: 1.5;
+}
+.avatar-transcript-user span {
+  color: var(--accent);
+}
+.avatar-transcript-ai {
+  font-family: var(--font-orbitron);
+  font-size: clamp(0.75rem, 1.6vw, 0.95rem);
+  color: var(--accent);
+  text-shadow: var(--shadow-glow);
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+}
+/* Mic Button */
+.mic-button-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: var(--space-2);
+}
+.mic-button {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  min-width: 48px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--accent);
+  background: var(--accent-dim);
+  color: var(--accent);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  transition: all var(--transition-base);
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+.mic-button:hover:not(.is-disabled):not(:disabled) {
+  background: var(--accent-glow);
+  box-shadow: 0 0 24px var(--accent);
+  transform: scale(1.05);
+}
+.mic-button.is-listening {
+  border-color: var(--accent);
+  background: var(--accent-glow);
+  box-shadow: 0 0 28px var(--accent);
+}
+.mic-button.is-processing {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.mic-button.is-error {
+  border-color: var(--nexus-red);
+  color: var(--nexus-red);
+  animation: shake 0.4s ease-in-out;
+}
+.mic-button.is-disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.mic-pulse-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  animation: ripple 1.5s ease-out infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+.mic-pulse-ring:nth-child(2) {
+  animation-delay: 0.5s;
+}
+.mic-label {
+  margin-top: var(--space-3);
+  font-family: var(--font-orbitron);
+  font-size: clamp(0.5625rem, 1.2vw, 0.6875rem);
+  letter-spacing: 0.3em;
+  text-align: center;
+  color: var(--accent);
+  text-shadow: var(--shadow-glow);
+  white-space: nowrap;
+}
+.mic-spinner {
+  animation: spin 1s linear infinite;
+}
+/* Mobile adjustments */
+@media (max-width: 767px) {
+  .avatar-container {
+    justify-content: space-between;
+    padding: var(--space-6) var(--space-4);
+    gap: var(--space-4);
+  }
+  .avatar-core-wrapper {
+    width: clamp(180px, 60vw, 280px);
+    height: clamp(180px, 60vw, 280px);
+  }
+  .avatar-greeting {
+    letter-spacing: 0.2em;
+  }
+  .avatar-state-text {
+    letter-spacing: 0.25em;
+  }
+  .mic-button {
+    width: 64px;
+    height: 64px;
+  }
+}
+/* Very short viewports */
+@media (max-height: 700px) {
+  .avatar-container {
+    gap: var(--space-3);
+    padding-top: var(--space-4);
+    padding-bottom: var(--space-4);
+  }
+  .avatar-core-wrapper {
+    width: clamp(180px, 35vh, 280px);
+    height: clamp(180px, 35vh, 280px);
+  }
+}

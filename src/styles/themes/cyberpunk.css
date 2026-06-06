@@ -1,0 +1,10 @@
+html.theme-cyberpunk {
+  --accent: #ff00ea;
+  --accent-glow: rgba(255, 0, 234, 0.3);
+  --accent-dim: rgba(255, 0, 234, 0.1);
+  --nexus-cyan: #ff00ea;
+}
+
+html.theme-cyberpunk body {
+  background-color: #0a0014;
+}

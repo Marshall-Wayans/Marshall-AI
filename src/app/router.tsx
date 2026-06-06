@@ -12,9 +12,9 @@ import { MissionControlPage } from '@/pages/mission-control/MissionControlPage'
 import { ProfilePage } from '@/pages/profile/ProfilePage'
 import { SettingsPage } from '@/pages/settings/SettingsPage'
 import { LogsPage } from '@/pages/logs/LogsPage'
+import { TrendRadarPage } from '@/pages/trend-radar/TrendRadarPage'
+import { SimulationCenterPage } from '@/pages/simulation-center/SimulationCenterPage'
 import {
-  TrendRadarView,
-  SimulationCenterView,
   ContentLabView,
   AnalyticsCenterView,
   SecurityCenterView,
@@ -43,8 +43,8 @@ export const AppRouter = () => (
         <Route element={<MissionControlLayout />}>
           <Route index element={<MissionControlPage />} />
         </Route>
-        <Route path={ROUTES.trendRadar} element={<TrendRadarView />} />
-        <Route path={ROUTES.simulationCenter} element={<SimulationCenterView />} />
+        <Route path={ROUTES.trendRadar} element={<TrendRadarPage />} />
+        <Route path={ROUTES.simulationCenter} element={<SimulationCenterPage />} />
         <Route path={ROUTES.contentLab} element={<ContentLabView />} />
         <Route path={ROUTES.analyticsCenter} element={<AnalyticsCenterView />} />
         <Route path={ROUTES.securityCenter} element={<SecurityCenterView />} />

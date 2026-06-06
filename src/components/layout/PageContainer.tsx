@@ -1,6 +1,6 @@
 import { useEffect, type ReactNode } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { pageTransitionConfig, pageTransitionVariants } from '@/hooks'
 import { RouteErrorBoundary } from '@/components/errors'
 import { NAV_ITEMS } from '@/constants'
@@ -27,18 +27,15 @@ export const PageContainer = () => {
   return (
     <main className="app-main">
       <RouteErrorBoundary>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={location.pathname}
-            initial={pageTransitionVariants.initial}
-            animate={pageTransitionVariants.animate}
-            exit={pageTransitionVariants.exit}
-            transition={pageTransitionConfig}
-            style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}
-          >
-            <Outlet />
-          </motion.div>
-        </AnimatePresence>
+        <motion.div
+          key={location.pathname}
+          initial={pageTransitionVariants.initial}
+          animate={pageTransitionVariants.animate}
+          transition={pageTransitionConfig}
+          style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}
+        >
+          <Outlet />
+        </motion.div>
       </RouteErrorBoundary>
     </main>
   )

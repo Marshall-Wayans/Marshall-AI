@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/marshall-ai/',
+  base: '/Marshall-AI/',
   plugins: [react()],
   resolve: {
     alias: {

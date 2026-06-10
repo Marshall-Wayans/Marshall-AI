@@ -1,4 +1,4 @@
-import React, {
+import {
   useCallback,
   useEffect,
   useRef,
@@ -85,7 +85,7 @@ export const AICommandInterface = memo(() => {
         window.speechSynthesis.speak(utter)
       } else {
         const duration = Math.max(2500, text.length * 35)
-        window.setTimeout(() => {
+        setTimeout(() => {
           setStreamActive(false)
           setState('IDLE')
         }, duration)
@@ -100,7 +100,7 @@ export const AICommandInterface = memo(() => {
       addEntry({ role: 'user', text: userText, module })
       setTranscript('')
 
-      window.setTimeout(() => {
+      setTimeout(() => {
         const response = generateResponse(userText, commanderName)
         speakResponse(response)
       }, 1400)
@@ -138,7 +138,7 @@ export const AICommandInterface = memo(() => {
 
     recognition.onerror = () => {
       setState('ERROR')
-      window.setTimeout(() => setState('IDLE'), 3000)
+      setTimeout(() => setState('IDLE'), 3000)
     }
 
     recognition.onend = () => {

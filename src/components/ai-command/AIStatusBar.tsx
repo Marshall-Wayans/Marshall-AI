@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import { memo } from 'react'
 import { motion } from 'framer-motion'
 import { useSimulationStore } from '@/store/simulationStore'
 import type { CoreState } from './AICoreSphere'
